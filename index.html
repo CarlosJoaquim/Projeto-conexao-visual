@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conexão Visual - Especialistas em Marketing Digital, Design Gráfico e Desenvolvimento Web. Soluções personalizadas para alavancar seu negócio no mundo digital.">
+    <meta name="keywords" content="marketing digital, design gráfico, desenvolvimento web, gestão de redes sociais, tráfego pago, SEO, criação de sites">
+    <title>Conexão Visual | Marketing Digital & Desenvolvimento Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos temporários para mensagem do formulário */
+        .form-message {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+        
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #001429;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: #4DD1E6;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header e Navegação -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#home">Conexão <span>Visual</span></a>
+            </div>
+            
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforme seu negócio com soluções digitais inteligentes</h1>
+                <p class="subtitle">Impulsionamos marcas com estratégias de marketing digital, design criativo e desenvolvimento web de alta performance.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Solicitar Orçamento</a>
+                    <a href="#services" class="btn btn-outline">Nossos Serviços</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe de marketing digital trabalhando" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Conexão Visual" loading="lazy">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Sobre a <span>Conexão Visual</span></h2>
+                <p>Fundada em 2024, a Conexão Visual atua no mercado de novas tecnologias de informação e comunicação em Marketing Digital, com o objetivo de compreender as necessidades dos clientes e oferecer soluções personalizadas.</p>
+                <p>Contamos com uma equipe altamente qualificada e competente nos novos meios e canais de comunicação digital, buscando reconhecimento pela excelência e competência sólida tanto no mercado nacional como internacional.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>+0</h3>
+                        <p>Clientes Satisfeitos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>+0</h3>
+                        <p>Projetos Entregues</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>0%</h3>
+                        <p>Dedicados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossos Serviços -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nossos <span>Serviços</span></h2>
+                <p class="section-subtitle">Soluções completas para alavancar seu negócio no mundo digital</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Design Gráfico -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Design Gráfico</h3>
+                    <ul>
+                        <li>Branding (Marca)</li>
+                        <li>Criação de Logotipo</li>
+                        <li>Identidade Visual</li>
+                        <li>Criativos Chamativos</li>
+                        <li>Panfletos e Flyers</li>
+                        <li>Cartões de Visita</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-small">Saiba Mais</a>
+                </div>
+
+                <!-- Marketing Digital -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Marketing Digital</h3>
+                    <ul>
+                        <li>Gestão de Tráfego Pago</li>
+                        <li>Facebook & Instagram Ads</li>
+                        <li>Google & LinkedIn Ads</li>
+                        <li>Gestão de Redes Sociais</li>
+                        <li>Criação de Conteúdo</li>
+                        <li>Campanhas de Publicidade</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-small">Saiba Mais</a>
+                </div>
+
+                <!-- Desenvolvimento Web -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Desenvolvimento Web</h3>
+                    <ul>
+                        <li>Sites Profissionais</li>
+                        <li>E-commerce</li>
+                        <li>Landing Pages</li>
+                        <li>Blogs e Portais</li>
+                        <li>Otimização SEO</li>
+                        <li>Hospedagem</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-small">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlight-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>Resultados Mensuráveis</h3>
+                <p>Nossas estratégias são baseadas em dados e métricas para garantir o melhor retorno sobre investimento.</p>
+            </div>
+            <div class="highlight-item">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Soluções Criativas</h3>
+                <p>Abordagens inovadoras para destacar sua marca em um mercado cada vez mais competitivo.</p>
+            </div>
+            <div class="highlight-item">
+                <i class="fas fa-headset"></i>
+                <h3>Suporte Dedicado</h3>
+                <p>Equipe sempre disponível para acompanhar seus projetos e tirar dúvidas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nosso <span>Portfólio</span></h2>
+                <p class="section-subtitle">Alguns dos nossos trabalhos recentes</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projeto de branding" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Branding - Restaurante</h3>
+                        <p>Identidade visual completa</p>
+                        <a href="#" class="btn btn-small">Ver Detalhes</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Website desenvolvido" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Website - Clínica Médica</h3>
+                        <p>Site institucional responsivo</p>
+                        <a href="#" class="btn btn-small">Ver Detalhes</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campanha de tráfego pago" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Campanha - E-commerce</h3>
+                        <p>Gestão de tráfego pago</p>
+                        <a href="#" class="btn btn-small">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O que dizem <span>nossos clientes</span></h2>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"A Conexão Visual transformou nossa presença digital. Em poucos meses nosso faturamento online aumentou em 300% com as campanhas de tráfego pago."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Cliente satisfeito" loading="lazy">
+                        <h4>Ana Silva</h4>
+                        <p>CEO - Moda Feminina</p>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"O site que desenvolveram para nossa clínica superou todas as expectativas. Profissionalismo e atenção aos detalhes em todo o processo."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente satisfeito" loading="lazy">
+                        <h4>Carlos Mendes</h4>
+                        <p>Diretor - Clínica Saúde</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Pronto para <span>transformar</span> seu negócio?</h2>
+                <p>Entre em contato conosco para uma consultoria gratuita e descubra como podemos ajudar sua empresa a crescer no mundo digital.</p>
+                
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+244 123 456 789</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>contato@conexaovisual.com</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Luanda, Angola</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" name="nome" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Seu Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="telefone" placeholder="Seu Telefone">
+                    </div>
+                    <div class="form-group">
+                        <select name="servico" required>
+                            <option value="" disabled selected>Selecione um serviço</option>
+                            <option value="Design Gráfico">Design Gráfico</option>
+                            <option value="Marketing Digital">Marketing Digital</option>
+                            <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                            <option value="SEO">SEO</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Conexão Visual</h3>
+                    <p>Especialistas em Marketing Digital, Design Gráfico e Desenvolvimento Web. Soluções personalizadas para alavancar seu negócio no mundo digital.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Serviços</h3>
+                    <ul>
+                        <li><a href="#">Design Gráfico</a></li>
+                        <li><a href="#">Marketing Digital</a></li>
+                        <li><a href="#">Desenvolvimento Web</a></li>
+                        <li><a href="#">Gestão de Redes Sociais</a></li>
+                        <li><a href="#">SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Assine nossa newsletter para receber dicas e novidades.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu Email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Conexão Visual. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Inicialize o EmailJS com seu User ID
+        emailjs.init('cbT_hzYhhTb2mGX21');
+    </script>
+    <script src="js/animations.js"></script>
+</body>
+</html>
