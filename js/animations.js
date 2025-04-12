@@ -56,15 +56,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+            // Verifica se não é um link de serviço (#design, #marketing, etc)
+            if (!this.getAttribute('href').match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
@@ -119,6 +122,127 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+    // =============================================
+    // SISTEMA DE CARREGAMENTO DINÂMICO DE SERVIÇOS
+    // =============================================
+
+    function setupServiceLinks() {
+        // Seleciona todos os links que devem carregar conteúdo dinâmico
+        const serviceLinks = document.querySelectorAll('a[href="#design"], a[href="#marketing"], a[href="#desenvolvimento"], a[href="#redes-sociais"], a[href="#seo"]');
+        
+        serviceLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Determina qual arquivo carregar baseado no link clicado
+                let serviceFile = '';
+                const href = this.getAttribute('href');
+                
+                if (href.includes('#design')) {
+                    serviceFile = 'design-grafico.html';
+                } else if (href.includes('#marketing')) {
+                    serviceFile = 'marketing-digital.html';
+                } else if (href.includes('#desenvolvimento')) {
+                    serviceFile = 'desenvolvimento-web.html';
+                } else if (href.includes('#redes-sociais')) {
+                    serviceFile = 'gestao-redes-sociais.html';
+                } else if (href.includes('#seo')) {
+                    serviceFile = 'seo.html';
+                }
+                
+                if (serviceFile) {
+                    loadDynamicContent(serviceFile);
+                }
+            });
+        });
+    }
+
+    function loadDynamicContent(file) {
+        const container = document.getElementById('dynamic-content-container');
+        const contentDiv = document.getElementById('dynamic-content');
+        
+        // Mostra o container com animação
+        gsap.to(container, {
+            duration: 0.5,
+            opacity: 1,
+            display: 'block',
+            ease: 'power2.out',
+            onStart: () => {
+                container.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+        
+        // Carrega o conteúdo do arquivo
+        fetch('includes/' + file)
+            .then(response => response.text())
+            .then(data => {
+                contentDiv.innerHTML = data;
+                
+                // Animação de entrada do conteúdo
+                gsap.from(contentDiv, { 
+                    duration: 0.8,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'back.out(1.4)'
+                });
+                
+                // Adiciona evento de clique para links dentro do conteúdo dinâmico
+                const dynamicLinks = contentDiv.querySelectorAll('a[href^="#"]');
+                dynamicLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        if (!this.getAttribute('href').match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
+                            e.preventDefault();
+                            closeDynamicContent();
+                            
+                            const targetId = this.getAttribute('href');
+                            const targetElement = document.querySelector(targetId);
+                            
+                            if (targetElement) {
+                                setTimeout(() => {
+                                    window.scrollTo({
+                                        top: targetElement.offsetTop - 80,
+                                        behavior: 'smooth'
+                                    });
+                                }, 500);
+                            }
+                        }
+                    });
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar o conteúdo:', error);
+                contentDiv.innerHTML = `
+                    <div class="service-detail">
+                        <h2>Serviço</h2>
+                        <p>Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente mais tarde.</p>
+                        <a href="#contact" class="btn btn-primary">Fale Conosco</a>
+                    </div>
+                `;
+            });
+    }
+
+    function closeDynamicContent() {
+        const container = document.getElementById('dynamic-content-container');
+        
+        // Animação de saída
+        gsap.to(container, { 
+            duration: 0.4,
+            opacity: 0,
+            ease: 'power2.in',
+            onComplete: () => {
+                container.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // Inicializa os listeners para os serviços
+    setupServiceLinks();
+    
+    // Configura o botão de fechar
+    document.getElementById('close-content-btn').addEventListener('click', closeDynamicContent);
 
     // Observer para animações ao scroll
     const observerOptions = {

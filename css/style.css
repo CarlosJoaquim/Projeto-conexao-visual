@@ -786,7 +786,7 @@ ul {
     .about-content,
     .contact-content,
     .contact-form {
-        padding-right: 0;
+        padding-right: 19px;
         margin-bottom: 40px;
         width: 100%;
     }
