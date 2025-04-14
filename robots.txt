@@ -1,15 +1,51 @@
+# robots.txt otimizado para Conexão Visual (SPA)
+# Última atualização: 2024-06-15
+
 User-agent: *
-Allow: /
-Disallow: /private/
-Disallow: /temp/
+Allow: /$
+Allow: /#!
+Allow: /index.html
+Disallow: /#*
 Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /config/
+Disallow: /node_modules/
 
-# Ferramentas de análise (reduza crawl se necessário)
+# Controle de crawl budget
+Crawl-delay: 2
+Request-rate: 1/5
+
+# Sitemaps
+Sitemap: https://conexaovisual.vercel.app/sitemap.xml
+Sitemap: https://conexaovisual.vercel.app/sitemap-index.xml
+
+# Configurações específicas para bots
+User-agent: Googlebot
+Allow: /#!about
+Allow: /#!services
+Allow: /#!services/*
+Allow: /#!portfolio
+Allow: /#!contact
+Disallow: /#*
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/
+Allow: /icone/
+Disallow: /temp-images/
+
+User-agent: Bingbot
+Allow: /#!
+Host: conexaovisual.vercel.app
+Crawl-delay: 3
+
+# Bloqueio de ferramentas de scraping
+User-agent: MJ12bot
+Disallow: /
+
 User-agent: AhrefsBot
-Crawl-delay: 5
+Disallow: /
 
-User-agent: SemrushBot
-Crawl-delay: 5
-
-# Sitemap (ESSENCIAL)
-Sitemap: https://conexaovisual.vercel.app/
+User-agent: SEMrushBot
+Disallow: /
