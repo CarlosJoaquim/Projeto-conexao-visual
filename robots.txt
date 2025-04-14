@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /temp/
+Disallow: /admin/
+
+# Ferramentas de análise (reduza crawl se necessário)
+User-agent: AhrefsBot
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Crawl-delay: 5
+
+# Sitemap (ESSENCIAL)
+Sitemap: https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/sitemap.xml
