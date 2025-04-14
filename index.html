@@ -51,76 +51,253 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Estilos adicionados para o conteúdo dinâmico */
-        .dynamic-content-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 20, 41, 0.95);
-            z-index: 1000;
-            overflow-y: auto;
-            display: none;
-            padding: 80px 20px 40px;
-            box-sizing: border-box;
-        }
+   /* =============================================
+   ESTILOS PARA MODAL DE INFORMAÇÕES DINÂMICAS
+   ============================================= */
 
-        .dynamic-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            color: white;
-            padding: 20px;
-        }
+/* Variáveis CSS para consistência */
+:root {
+  --primary-color: #4DD1E6;
+  --primary-hover: #3ab7cc;
+  --dark-bg: rgba(0, 20, 41, 0.97);
+  --content-bg: rgba(255, 255, 255, 0.1);
+  --text-color: #ffffff;
+  --transition-speed: 0.3s;
+}
 
-        .close-content-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4DD1E6;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1001;
+/* Container Principal - Efeito de fade in */
+.dynamic-content-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-bg);
+  z-index: 1000;
+  overflow-y: auto;
+  display: none;
+  opacity: 0;
+  padding: 60px 15px 30px;
+  box-sizing: border-box;
+  transition: opacity var(--transition-speed) ease;
+  backdrop-filter: blur(5px);
+}
+
+.dynamic-content-container.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Conteúdo Centralizado */
+.dynamic-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-color);
+  padding: 15px;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Botão de Fechar - Melhor acessibilidade */
+.close-content-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: var(--primary-color);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.close-content-btn:hover,
+.close-content-btn:focus {
+  background: var(--primary-hover);
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* Estilos para Cada Seção de Serviço */
+.service-detail {
+  padding: 20px;
+  background: var(--content-bg);
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 3px solid var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.service-detail:hover {
+  transform: translateY(-3px);
+}
+
+.service-detail h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.service-detail h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.service-detail h3 {
+  color: var(--primary-color);
+  margin: 22px 0 15px;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.service-detail p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.service-detail ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.service-detail li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 15px;
+}
+
+.service-detail li::before {
+  content: '•';
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+/* Efeitos Visuais */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Barra de Scroll Personalizada */
+.dynamic-content-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dynamic-content-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+
+.dynamic-content-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* =============================================
+   RESPONSIVIDADE - TABLET E DESKTOP
+   ============================================= */
+@media (min-width: 768px) {
+  .dynamic-content-container {
+    padding: 80px 30px 50px;
+  }
+  
+  .dynamic-content {
+    padding: 30px;
+  }
+  
+  .close-content-btn {
+    top: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+  }
+  
+  .service-detail {
+    padding: 30px;
+    margin-bottom: 35px;
+  }
+  
+  .service-detail h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .service-detail h3 {
+    font-size: 1.6rem;
+    margin: 25px 0 18px;
+  }
+  
+  .service-detail p,
+  .service-detail li {
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-detail {
+    padding: 40px;
+  }
+  
+  .service-detail h2 {
+    font-size: 2.3rem;
+  }
+}
+        /* Estilos para as imagens adicionadas */
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        .close-content-btn:hover {
-            background: #3ab7cc;
+            gap: 2px;
         }
         
-        .service-detail {
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin-bottom: 30px;
+        .logo img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
         }
         
-        .service-detail h2 {
-            color: #4DD1E6;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            color: inherit;
         }
         
-        .service-detail h3 {
-            color: #4DD1E6;
-            margin: 25px 0 15px;
-            font-size: 1.5rem;
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
         }
         
-        .service-detail ul {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .service-detail li {
-            margin-bottom: 10px;
+        .footer-logo img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -134,7 +311,10 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="#home">Conexão <span>Visual</span></a>
+                <a href="#home">
+                    <img src="icone/conexao-digital.png" alt="Logo Conexão Visual">
+                    Conexão <span>Visual</span>
+                </a>
             </div>
             
             <nav class="nav">
@@ -436,7 +616,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <h3>Conexão Visual</h3>
+                    <div class="footer-logo">
+                        <img src="icone/conexao-digital.png" alt="Logo Conexão Visual">
+                        <h3>Conexão Visual</h3>
+                    </div>
                     <p>Especialistas em Marketing Digital, Design Gráfico e Desenvolvimento Web. Soluções personalizadas para alavancar seu negócio no mundo digital.</p>
                 </div>
                 <div class="footer-col">

@@ -891,3 +891,374 @@ ul {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+
+
+
+
+
+
+
+
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--cyan);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Melhorias nas animações */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animate].animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ajuste para o texto do hero */
+.hero-content h1 {
+    white-space: normal;
+    word-spacing: normal;
+    overflow: hidden;
+}
+
+/* Menu Mobile Animation */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.form-message {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+ /* Estilos temporários para mensagem do formulário */
+ .form-message {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #001429;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: #4DD1E6;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =============================================
+ESTILOS PARA MODAL DE INFORMAÇÕES DINÂMICAS
+============================================= */
+
+/* Variáveis CSS para consistência */
+:root {
+--primary-color: #4DD1E6;
+--primary-hover: #3ab7cc;
+--dark-bg: rgba(0, 20, 41, 0.97);
+--content-bg: rgba(255, 255, 255, 0.1);
+--text-color: #ffffff;
+--transition-speed: 0.3s;
+}
+
+/* Container Principal - Efeito de fade in */
+.dynamic-content-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: var(--dark-bg);
+z-index: 1000;
+overflow-y: auto;
+display: none;
+opacity: 0;
+padding: 60px 15px 30px;
+box-sizing: border-box;
+transition: opacity var(--transition-speed) ease;
+backdrop-filter: blur(5px);
+}
+
+.dynamic-content-container.active {
+display: block;
+opacity: 1;
+}
+
+/* Conteúdo Centralizado */
+.dynamic-content {
+max-width: 1200px;
+margin: 0 auto;
+color: var(--text-color);
+padding: 15px;
+animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Botão de Fechar - Melhor acessibilidade */
+.close-content-btn {
+position: fixed;
+top: 15px;
+right: 15px;
+background: var(--primary-color);
+border: none;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+color: white;
+font-size: 20px;
+cursor: pointer;
+z-index: 1001;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all var(--transition-speed) ease;
+box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.close-content-btn:hover,
+.close-content-btn:focus {
+background: var(--primary-hover);
+transform: scale(1.1);
+outline: none;
+}
+
+/* Estilos para Cada Seção de Serviço */
+.service-detail {
+padding: 20px;
+background: var(--content-bg);
+border-radius: 10px;
+margin-bottom: 25px;
+border-left: 3px solid var(--primary-color);
+transition: transform 0.3s ease;
+}
+
+.service-detail:hover {
+transform: translateY(-3px);
+}
+
+.service-detail h2 {
+color: var(--primary-color);
+margin-bottom: 15px;
+font-size: 1.6rem;
+font-weight: 600;
+position: relative;
+padding-bottom: 10px;
+}
+
+.service-detail h2::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 50px;
+height: 2px;
+background: var(--primary-color);
+}
+
+.service-detail h3 {
+color: var(--primary-color);
+margin: 22px 0 15px;
+font-size: 1.3rem;
+font-weight: 500;
+}
+
+.service-detail p {
+line-height: 1.6;
+margin-bottom: 15px;
+}
+
+.service-detail ul {
+padding-left: 20px;
+margin-bottom: 20px;
+}
+
+.service-detail li {
+margin-bottom: 10px;
+line-height: 1.5;
+position: relative;
+padding-left: 15px;
+}
+
+.service-detail li::before {
+content: '•';
+color: var(--primary-color);
+position: absolute;
+left: 0;
+font-size: 1.2em;
+}
+
+/* Efeitos Visuais */
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* Barra de Scroll Personalizada */
+.dynamic-content-container::-webkit-scrollbar {
+width: 8px;
+}
+
+.dynamic-content-container::-webkit-scrollbar-track {
+background: rgba(0,0,0,0.1);
+}
+
+.dynamic-content-container::-webkit-scrollbar-thumb {
+background: var(--primary-color);
+border-radius: 4px;
+}
+
+/* =============================================
+RESPONSIVIDADE - TABLET E DESKTOP
+============================================= */
+@media (min-width: 768px) {
+.dynamic-content-container {
+padding: 80px 30px 50px;
+}
+
+.dynamic-content {
+padding: 30px;
+}
+
+.close-content-btn {
+top: 25px;
+right: 25px;
+width: 45px;
+height: 45px;
+font-size: 22px;
+}
+
+.service-detail {
+padding: 30px;
+margin-bottom: 35px;
+}
+
+.service-detail h2 {
+font-size: 2rem;
+margin-bottom: 20px;
+}
+
+.service-detail h3 {
+font-size: 1.6rem;
+margin: 25px 0 18px;
+}
+
+.service-detail p,
+.service-detail li {
+font-size: 1.05rem;
+}
+}
+
+@media (min-width: 1024px) {
+.service-detail {
+padding: 40px;
+}
+
+.service-detail h2 {
+font-size: 2.3rem;
+}
+}
+/* Estilos para as imagens adicionadas */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.footer-logo img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
