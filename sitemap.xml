@@ -3,16 +3,16 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <!-- Página principal (Home) -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/</loc>
+        <loc>https://conexaovisual.vercel.app/</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://conexaovisual.vercel.app/"/>
     </url>
 
     <!-- Seção Sobre -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#about</loc>
+        <loc>https://conexaovisual.vercel.app/#about</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -20,7 +20,7 @@
 
     <!-- Serviços -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#services</loc>
+        <loc>https://conexaovisual.vercel.app/#services</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
@@ -28,31 +28,31 @@
 
     <!-- Sub-serviços -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#design</loc>
+        <loc>https://conexaovisual.vercel.app/#design</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#marketing</loc>
+        <loc>https://conexaovisual.vercel.app/#marketing</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#desenvolvimento</loc>
+        <loc>https://conexaovisual.vercel.app/#desenvolvimento</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#redes-sociais</loc>
+        <loc>https://conexaovisual.vercel.app/#redes-sociais</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#seo</loc>
+        <loc>https://conexaovisual.vercel.app/#seo</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
@@ -60,7 +60,7 @@
 
     <!-- Portfólio -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#portfolio</loc>
+        <loc>https://conexaovisual.vercel.app/#portfolio</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -68,7 +68,7 @@
 
     <!-- Contato -->
     <url>
-        <loc>https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/#contact</loc>
+        <loc>https://conexaovisual.vercel.app/#contact</loc>
         <lastmod>2024-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>

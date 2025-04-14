@@ -12,4 +12,4 @@ User-agent: SemrushBot
 Crawl-delay: 5
 
 # Sitemap (ESSENCIAL)
-Sitemap: https://conexaovisual-kbh56vkrk-carlos-joaquims-projects.vercel.app/sitemap.xml
+Sitemap: https://conexaovisual.vercel.app/
