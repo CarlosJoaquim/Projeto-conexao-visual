@@ -61,7 +61,7 @@ const USER_CONFIG = {
   
       return emailjs.sendForm(
         'service_vz4bceg', // Seu Service ID
-        'template_p28xvac', // Seu Template ID
+        'template_9slap3q', // Seu Template ID
         this.form
       );
     }

@@ -566,8 +566,8 @@ document.addEventListener('DOMContentLoaded', function() {
             DOM.formMessage.style.display = 'none';
             
             emailjs.sendForm(
-                'service_2mr40ca', // ID do serviço
-                'template_p28xvac', // ID do template
+                'service_vz4bceg', // ID do serviço
+                'template_9slap3q', // ID do template
                 this
             )
             .then(() => {

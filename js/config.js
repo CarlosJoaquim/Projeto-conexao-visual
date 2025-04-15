@@ -31,7 +31,7 @@ const AppConfig = {
   // =============================================
   const EmailJSConfig = {
     serviceID: "service_vz4bceg", // Seu Service ID real
-    templateID: "template_p28xvac", // Seu Template ID real
+    templateID: "template_9slap3q", // Seu Template ID real
     publicKey: "cbT_hzYhhTb2mGX21", // Sua Public Key
     privateKey: process.env.EMAILJS_PRIVATE_KEY || "", // Só no server-side
   
