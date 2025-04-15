@@ -773,6 +773,12 @@ ul {
     
     .mobile-menu-btn {
         display: block;
+        display: block;
+        border-radius: 1vh;
+        border: none;
+        outline: 0px;
+        background-color: #ffffff00;
+        color: white;
     }
     
     .hero .container,
