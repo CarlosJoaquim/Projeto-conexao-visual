@@ -1,6 +1,6 @@
 /**
  * CONEXÃO VISUAL - SCRIPT PRINCIPAL OTIMIZADO
- * Versão: 2.0
+ * Versão: 2.1
  * Autor: Carlos Joaquim
  * Data: 15/06/2024
  */
@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         preloader: document.querySelector('.preloader'),
         mobileMenuBtn: document.querySelector('.mobile-menu-btn'),
         mobileMenu: document.querySelector('.mobile-menu'),
+        mobileOverlay: document.getElementById('mobileOverlay'),
+        mobileMenuClose: document.getElementById('mobileMenuClose'),
         header: document.querySelector('.header'),
         dynamicContainer: document.getElementById('dynamic-content-container'),
         dynamicContent: document.getElementById('dynamic-content'),
@@ -42,36 +44,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================
-    // MENU MOBILE
+    // MENU MOBILE - ATUALIZADO
     // =============================================
     function initMobileMenu() {
-        if (!DOM.mobileMenuBtn || !DOM.mobileMenu) return;
+        if (!DOM.mobileMenuBtn || !DOM.mobileMenu || !DOM.mobileOverlay || !DOM.mobileMenuClose) return;
 
+        // Abrir menu
         DOM.mobileMenuBtn.addEventListener('click', function() {
-            const isActive = this.classList.toggle('active');
-            DOM.mobileMenu.classList.toggle('active');
+            openMobileMenu();
+        });
 
-            if (isActive) {
-                gsap.fromTo(DOM.mobileMenu, 
-                    { x: '100%' }, 
-                    { x: '0%', duration: 0.5, ease: 'power3.out' }
-                );
-                
-                gsap.from('.mobile-menu li', {
-                    x: 30,
-                    opacity: 0,
-                    stagger: 0.1,
-                    duration: 0.4,
-                    delay: 0.3
-                });
-            } else {
+        // Fechar menu pelo botão X
+        DOM.mobileMenuClose.addEventListener('click', closeMobileMenu);
+        
+        // Fechar menu pelo overlay
+        DOM.mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Fechar menu ao clicar em links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Fechar ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && DOM.mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
+    }
 
-        // Fechar menu ao clicar em links
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
+    function openMobileMenu() {
+        DOM.mobileMenuBtn.classList.add('active');
+        DOM.mobileMenu.classList.add('active');
+        DOM.mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        gsap.fromTo(DOM.mobileMenu, 
+            { x: '100%' }, 
+            { x: '0%', duration: 0.5, ease: 'power3.out' }
+        );
+        
+        gsap.from('.mobile-menu li', {
+            x: 30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.4,
+            delay: 0.3
         });
     }
 
@@ -83,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
             onComplete: () => {
                 DOM.mobileMenu.classList.remove('active');
                 DOM.mobileMenuBtn.classList.remove('active');
+                DOM.mobileOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
             }
         });
     }
