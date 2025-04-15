@@ -1,460 +1,531 @@
+/**
+ * CONEXÃO VISUAL - SCRIPT PRINCIPAL OTIMIZADO
+ * Versão: 2.0
+ * Autor: Carlos Joaquim
+ * Data: 15/06/2024
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
-    const preloader = document.querySelector('.preloader');
-    
-    // Esconder preloader quando a página carregar
-    window.addEventListener('load', function() {
-        gsap.to(preloader, {
-            duration: 0.8,
-            opacity: 0,
-            display: 'none',
-            ease: 'power2.out'
-        });
-    });
+    // =============================================
+    // CONFIGURAÇÕES INICIAIS
+    // =============================================
+    const DOM = {
+        preloader: document.querySelector('.preloader'),
+        mobileMenuBtn: document.querySelector('.mobile-menu-btn'),
+        mobileMenu: document.querySelector('.mobile-menu'),
+        header: document.querySelector('.header'),
+        dynamicContainer: document.getElementById('dynamic-content-container'),
+        dynamicContent: document.getElementById('dynamic-content'),
+        closeBtn: document.getElementById('close-content-btn'),
+        contactForm: document.getElementById('contactForm'),
+        formMessage: document.getElementById('formMessage')
+    };
 
-    // Menu Mobile
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        this.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        
-        if (mobileMenu.classList.contains('active')) {
-            gsap.fromTo(mobileMenu, 
-                { x: '100%' }, 
-                { x: '0%', duration: 0.5, ease: 'power3.out' }
-            );
-            
-            gsap.from('.mobile-menu li', {
-                x: 30,
+    // =============================================
+    // PRELOADER
+    // =============================================
+    function initPreloader() {
+        if (!DOM.preloader) return;
+
+        window.addEventListener('load', function() {
+            gsap.to(DOM.preloader, {
+                duration: 0.8,
                 opacity: 0,
-                stagger: 0.1,
-                duration: 0.4,
-                delay: 0.3
-            });
-        }
-    });
-
-    // Fechar menu ao clicar em um link
-    const mobileLinks = document.querySelectorAll('.mobile-menu a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            gsap.to(mobileMenu, {
-                x: '100%',
-                duration: 0.3,
-                ease: 'power3.in',
+                display: 'none',
+                ease: 'power2.out',
                 onComplete: () => {
-                    mobileMenu.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
+                    DOM.preloader.style.display = 'none';
+                    initScrollAnimations();
                 }
             });
         });
-    });
-
-    // Scroll suave para links internos
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Verifica se não é um link de serviço (#design, #marketing, etc)
-            if (!this.getAttribute('href').match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // Header scroll effect
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // Animação de contagem para estatísticas
-    const statItems = document.querySelectorAll('.stat-item h3');
-    const statsSection = document.querySelector('.about-stats');
-    
-    function animateStats() {
-        const statsPosition = statsSection.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-
-        if (statsPosition < screenPosition) {
-            const targets = [50, 100, 100];
-            
-            statItems.forEach((stat, index) => {
-                const target = targets[index];
-                let count = 0;
-                const isPercentage = stat.textContent.includes('%');
-                
-                stat.textContent = isPercentage ? '0%' : '+0';
-                
-                const duration = 2;
-                const increment = target / (duration * 60);
-                
-                const updateCount = () => {
-                    count += increment;
-                    
-                    if (count < target) {
-                        stat.textContent = isPercentage 
-                            ? Math.floor(count) + '%' 
-                            : '+' + Math.floor(count);
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        stat.textContent = isPercentage 
-                            ? target + '%' 
-                            : '+' + target;
-                    }
-                };
-                
-                setTimeout(updateCount, index * 300);
-            });
-        }
     }
 
     // =============================================
-    // SISTEMA DE CARREGAMENTO DINÂMICO DE SERVIÇOS
+    // MENU MOBILE
     // =============================================
+    function initMobileMenu() {
+        if (!DOM.mobileMenuBtn || !DOM.mobileMenu) return;
 
-    function setupServiceLinks() {
-        // Seleciona todos os links que devem carregar conteúdo dinâmico
-        const serviceLinks = document.querySelectorAll('a[href="#design"], a[href="#marketing"], a[href="#desenvolvimento"], a[href="#redes-sociais"], a[href="#seo"]');
-        
-        serviceLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
+        DOM.mobileMenuBtn.addEventListener('click', function() {
+            const isActive = this.classList.toggle('active');
+            DOM.mobileMenu.classList.toggle('active');
+
+            if (isActive) {
+                gsap.fromTo(DOM.mobileMenu, 
+                    { x: '100%' }, 
+                    { x: '0%', duration: 0.5, ease: 'power3.out' }
+                );
                 
-                // Determina qual arquivo carregar baseado no link clicado
-                let serviceFile = '';
+                gsap.from('.mobile-menu li', {
+                    x: 30,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 0.4,
+                    delay: 0.3
+                });
+            } else {
+                closeMobileMenu();
+            }
+        });
+
+        // Fechar menu ao clicar em links
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+    }
+
+    function closeMobileMenu() {
+        gsap.to(DOM.mobileMenu, {
+            x: '100%',
+            duration: 0.3,
+            ease: 'power3.in',
+            onComplete: () => {
+                DOM.mobileMenu.classList.remove('active');
+                DOM.mobileMenuBtn.classList.remove('active');
+            }
+        });
+    }
+
+    // =============================================
+    // SCROLL SUAVE
+    // =============================================
+    function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 
-                if (href.includes('#design')) {
-                    serviceFile = 'design-grafico.html';
-                } else if (href.includes('#marketing')) {
-                    serviceFile = 'marketing-digital.html';
-                } else if (href.includes('#desenvolvimento')) {
-                    serviceFile = 'desenvolvimento-web.html';
-                } else if (href.includes('#redes-sociais')) {
-                    serviceFile = 'gestao-redes-sociais.html';
-                } else if (href.includes('#seo')) {
-                    serviceFile = 'seo.html';
-                }
-                
-                if (serviceFile) {
-                    loadDynamicContent(serviceFile);
+                // Ignora links de serviços (gerenciados separadamente)
+                if (!href.match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Fecha menu mobile se estiver aberto
+                        if (DOM.mobileMenu.classList.contains('active')) {
+                            closeMobileMenu();
+                        }
+                    }
                 }
             });
         });
+    }
+
+    // =============================================
+    // HEADER SCROLL EFFECT
+    // =============================================
+    function initHeaderScroll() {
+        if (!DOM.header) return;
+
+        window.addEventListener('scroll', throttle(function() {
+            DOM.header.classList.toggle('scrolled', window.scrollY > 50);
+        }, 100));
+    }
+
+    // =============================================
+    // ANIMAÇÃO DE ESTATÍSTICAS
+    // =============================================
+    function initStatsAnimation() {
+        const statsSection = document.querySelector('.about-stats');
+        if (!statsSection) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    }
+
+    function animateStats() {
+        const statItems = document.querySelectorAll('.stat-item h3');
+        const targets = [50, 100, 100];
+        const duration = 2;
+        
+        statItems.forEach((stat, index) => {
+            const target = targets[index];
+            const isPercentage = stat.textContent.includes('%');
+            let count = 0;
+            
+            stat.textContent = isPercentage ? '0%' : '+0';
+            const increment = target / (duration * 60);
+            
+            const updateCount = () => {
+                count += increment;
+                
+                if (count < target) {
+                    stat.textContent = isPercentage 
+                        ? `${Math.floor(count)}%` 
+                        : `+${Math.floor(count)}`;
+                    requestAnimationFrame(updateCount);
+                } else {
+                    stat.textContent = isPercentage 
+                        ? `${target}%` 
+                        : `+${target}`;
+                }
+            };
+            
+            setTimeout(updateCount, index * 300);
+        });
+    }
+
+    // =============================================
+    // CONTEÚDO DINÂMICO DE SERVIÇOS
+    // =============================================
+    function initDynamicContent() {
+        if (!DOM.dynamicContainer || !DOM.dynamicContent) return;
+
+        // Mapeamento de serviços
+        const servicesMap = {
+            '#design': 'design-grafico.html',
+            '#marketing': 'marketing-digital.html',
+            '#desenvolvimento': 'desenvolvimento-web.html',
+            '#redes-sociais': 'gestao-redes-sociais.html',
+            '#seo': 'seo.html'
+        };
+
+        // Configura listeners para links de serviço
+        document.querySelectorAll('[href^="#"]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (servicesMap[href]) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loadDynamicContent(servicesMap[href]);
+                });
+            }
+        });
+
+        // Botão de fechar
+        DOM.closeBtn.addEventListener('click', closeDynamicContent);
     }
 
     function loadDynamicContent(file) {
-        const container = document.getElementById('dynamic-content-container');
-        const contentDiv = document.getElementById('dynamic-content');
-        
-        // Mostra o container com animação
-        gsap.to(container, {
+        fetch(`includes/${file}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Falha ao carregar');
+                return response.text();
+            })
+            .then(data => {
+                DOM.dynamicContent.innerHTML = data;
+                showDynamicContent();
+                setupDynamicLinks();
+            })
+            .catch(handleDynamicContentError);
+    }
+
+    function showDynamicContent() {
+        gsap.to(DOM.dynamicContainer, {
             duration: 0.5,
             opacity: 1,
             display: 'block',
             ease: 'power2.out',
             onStart: () => {
-                container.style.display = 'block';
+                DOM.dynamicContainer.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             }
         });
         
-        // Carrega o conteúdo do arquivo
-        fetch('includes/' + file)
-            .then(response => response.text())
-            .then(data => {
-                contentDiv.innerHTML = data;
-                
-                // Animação de entrada do conteúdo
-                gsap.from(contentDiv, { 
-                    duration: 0.8,
-                    y: 50,
-                    opacity: 0,
-                    ease: 'back.out(1.4)'
-                });
-                
-                // Adiciona evento de clique para links dentro do conteúdo dinâmico
-                const dynamicLinks = contentDiv.querySelectorAll('a[href^="#"]');
-                dynamicLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        if (!this.getAttribute('href').match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
-                            e.preventDefault();
-                            closeDynamicContent();
-                            
-                            const targetId = this.getAttribute('href');
-                            const targetElement = document.querySelector(targetId);
-                            
-                            if (targetElement) {
-                                setTimeout(() => {
-                                    window.scrollTo({
-                                        top: targetElement.offsetTop - 80,
-                                        behavior: 'smooth'
-                                    });
-                                }, 500);
-                            }
-                        }
-                    });
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao carregar o conteúdo:', error);
-                contentDiv.innerHTML = `
-                    <div class="service-detail">
-                        <h2>Serviço</h2>
-                        <p>Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente mais tarde.</p>
-                        <a href="#contact" class="btn btn-primary">Fale Conosco</a>
-                    </div>
-                `;
-            });
+        gsap.from(DOM.dynamicContent, { 
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            ease: 'back.out(1.4)'
+        });
     }
 
     function closeDynamicContent() {
-        const container = document.getElementById('dynamic-content-container');
-        
-        // Animação de saída
-        gsap.to(container, { 
+        gsap.to(DOM.dynamicContainer, { 
             duration: 0.4,
             opacity: 0,
             ease: 'power2.in',
             onComplete: () => {
-                container.style.display = 'none';
+                DOM.dynamicContainer.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
     }
 
-    // Inicializa os listeners para os serviços
-    setupServiceLinks();
-    
-    // Configura o botão de fechar
-    document.getElementById('close-content-btn').addEventListener('click', closeDynamicContent);
+    function setupDynamicLinks() {
+        DOM.dynamicContent.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!this.getAttribute('href').match(/#(design|marketing|desenvolvimento|redes-sociais|seo)/)) {
+                    e.preventDefault();
+                    closeDynamicContent();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }, 500);
+                    }
+                }
+            });
+        });
+    }
 
-    // Observer para animações ao scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
+    function handleDynamicContentError(error) {
+        console.error('Erro ao carregar conteúdo:', error);
+        DOM.dynamicContent.innerHTML = `
+            <div class="service-detail">
+                <h2>Serviço</h2>
+                <p>Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente mais tarde.</p>
+                <a href="#contact" class="btn btn-primary">Fale Conosco</a>
+            </div>
+        `;
+    }
 
-    const observer = new IntersectionObserver(function(entries, observer) {
+    // =============================================
+    // ANIMAÇÕES AO SCROLL
+    // =============================================
+    function initScrollAnimations() {
+        const observer = new IntersectionObserver(handleIntersection, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('section, .highlights').forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+    function handleIntersection(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Animação para a seção hero
-                if (entry.target.id === 'home') {
-                    const heroTitle = entry.target.querySelector('h1');
-                    const originalText = heroTitle.textContent;
-                    heroTitle.textContent = '';
-                    
-                    let i = 0;
-                    const typingSpeed = 50;
-                    
-                    const typeWriter = () => {
-                        if (i < originalText.length) {
-                            heroTitle.textContent += originalText.charAt(i);
-                            i++;
-                            setTimeout(typeWriter, typingSpeed);
-                        }
-                    };
-                    
-                    setTimeout(typeWriter, 500);
-                    
-                    gsap.from(entry.target.querySelector('.subtitle'), {
-                        duration: 1.2,
-                        y: 30,
-                        opacity: 0,
-                        delay: 0.8,
-                        ease: 'power3.out'
-                    });
-                    
-                    gsap.from(entry.target.querySelectorAll('.btn'), {
-                        duration: 1,
-                        y: 30,
-                        opacity: 0,
-                        delay: 1.2,
-                        ease: 'power3.out',
-                        stagger: 0.2
-                    });
-                    
-                    gsap.from(entry.target.querySelector('.hero-image'), {
-                        duration: 1.5,
-                        x: 100,
-                        opacity: 0,
-                        delay: 0.5,
-                        ease: 'elastic.out(1, 0.3)'
-                    });
+                const animations = {
+                    '#home': animateHeroSection,
+                    '#about': animateAboutSection,
+                    '#services': animateServicesSection,
+                    '#portfolio': animatePortfolioSection,
+                    '.testimonials': animateTestimonialsSection,
+                    '#contact': animateContactSection
+                };
+
+                if (animations[entry.target.id || entry.target.className]) {
+                    animations[entry.target.id || entry.target.className](entry.target);
                 }
 
-                // Animação para a seção about
+                // Sempre anima stats quando a seção about é visível
                 if (entry.target.id === 'about') {
-                    gsap.from(entry.target.querySelector('.about-image'), {
-                        duration: 1.2,
-                        x: -50,
-                        opacity: 0,
-                        ease: 'power3.out'
-                    });
-                    
-                    gsap.from(entry.target.querySelector('.about-content h2'), {
-                        duration: 0.8,
-                        y: 30,
-                        opacity: 0,
-                        ease: 'power3.out'
-                    });
-                    
-                    gsap.from(entry.target.querySelectorAll('.about-content p'), {
-                        duration: 0.8,
-                        y: 30,
-                        opacity: 0,
-                        delay: 0.3,
-                        ease: 'power3.out',
-                        stagger: 0.15
-                    });
-                    
                     animateStats();
-                    
-                    gsap.from(entry.target.querySelectorAll('.stat-item'), {
-                        duration: 1,
-                        y: 50,
-                        opacity: 0,
-                        delay: 0.6,
-                        ease: 'back.out(1.7)',
-                        stagger: 0.2
-                    });
                 }
-
-                // Animação para a seção services
-                if (entry.target.id === 'services') {
-                    gsap.from(entry.target.querySelectorAll('.service-card'), {
-                        duration: 1,
-                        y: 80,
-                        opacity: 0,
-                        ease: 'back.out(1.4)',
-                        stagger: 0.2
-                    });
-                }
-
-                // Animação para a seção portfolio
-                if (entry.target.id === 'portfolio') {
-                    gsap.from(entry.target.querySelectorAll('.portfolio-item'), {
-                        duration: 0.8,
-                        scale: 0.9,
-                        opacity: 0,
-                        ease: 'power3.out',
-                        stagger: 0.15
-                    });
-                }
-
-                // Animação para a seção testimonials
-                if (entry.target.classList.contains('testimonials')) {
-                    gsap.from(entry.target.querySelectorAll('.testimonial-item'), {
-                        duration: 1,
-                        x: -50,
-                        opacity: 0,
-                        ease: 'power3.out',
-                        stagger: 0.3
-                    });
-                }
-
-                // Animação para a seção contact
-                if (entry.target.id === 'contact') {
-                    gsap.from(entry.target.querySelector('.contact-content'), {
-                        duration: 1,
-                        x: -50,
-                        opacity: 0,
-                        ease: 'power3.out'
-                    });
-                    
-                    gsap.from(entry.target.querySelector('.contact-form'), {
-                        duration: 1,
-                        x: 50,
-                        opacity: 0,
-                        delay: 0.2,
-                        ease: 'power3.out'
-                    });
-                }
-
-                observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }
 
-    // Observar todas as seções
-    document.querySelectorAll('section, .highlights').forEach(section => {
-        observer.observe(section);
-    });
-
-    // Efeito parallax suave
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.pageYOffset;
-        const heroImage = document.querySelector('.hero-image img');
+    function animateHeroSection(section) {
+        const heroTitle = section.querySelector('h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
         
-        if (heroImage) {
+        typeWriter(heroTitle, originalText, 50, 500);
+        
+        gsap.from(section.querySelector('.subtitle'), {
+            duration: 1.2,
+            y: 30,
+            opacity: 0,
+            delay: 0.8,
+            ease: 'power3.out'
+        });
+        
+        gsap.from(section.querySelectorAll('.btn'), {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 1.2,
+            ease: 'power3.out',
+            stagger: 0.2
+        });
+        
+        gsap.from(section.querySelector('.hero-image'), {
+            duration: 1.5,
+            x: 100,
+            opacity: 0,
+            delay: 0.5,
+            ease: 'elastic.out(1, 0.3)'
+        });
+    }
+
+    function animateAboutSection(section) {
+        gsap.from(section.querySelector('.about-image'), {
+            duration: 1.2,
+            x: -50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from(section.querySelector('.about-content h2'), {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from(section.querySelectorAll('.about-content p'), {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'power3.out',
+            stagger: 0.15
+        });
+        
+        gsap.from(section.querySelectorAll('.stat-item'), {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            delay: 0.6,
+            ease: 'back.out(1.7)',
+            stagger: 0.2
+        });
+    }
+
+    function animateServicesSection(section) {
+        gsap.from(section.querySelectorAll('.service-card'), {
+            duration: 1,
+            y: 80,
+            opacity: 0,
+            ease: 'back.out(1.4)',
+            stagger: 0.2
+        });
+    }
+
+    function animatePortfolioSection(section) {
+        gsap.from(section.querySelectorAll('.portfolio-item'), {
+            duration: 0.8,
+            scale: 0.9,
+            opacity: 0,
+            ease: 'power3.out',
+            stagger: 0.15
+        });
+    }
+
+    function animateTestimonialsSection(section) {
+        gsap.from(section.querySelectorAll('.testimonial-item'), {
+            duration: 1,
+            x: -50,
+            opacity: 0,
+            ease: 'power3.out',
+            stagger: 0.3
+        });
+    }
+
+    function animateContactSection(section) {
+        gsap.from(section.querySelector('.contact-content'), {
+            duration: 1,
+            x: -50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from(section.querySelector('.contact-form'), {
+            duration: 1,
+            x: 50,
+            opacity: 0,
+            delay: 0.2,
+            ease: 'power3.out'
+        });
+    }
+
+    function typeWriter(element, text, speed, delay) {
+        let i = 0;
+        setTimeout(() => {
+            const typing = () => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            };
+            typing();
+        }, delay);
+    }
+
+    // =============================================
+    // EFEITO PARALLAX
+    // =============================================
+    function initParallax() {
+        const heroImage = document.querySelector('.hero-image img');
+        if (!heroImage) return;
+
+        window.addEventListener('scroll', throttle(function() {
+            const scrollPosition = window.pageYOffset;
             const heroSection = document.querySelector('.hero');
             const heroRect = heroSection.getBoundingClientRect();
             
             if (heroRect.top < window.innerHeight && heroRect.bottom > 0) {
-                const parallaxValue = scrollPosition * 0.3;
                 gsap.to(heroImage, {
-                    y: parallaxValue,
+                    y: scrollPosition * 0.3,
                     duration: 0.5,
                     ease: 'power1.out'
                 });
             }
-        }
-    });
+        }, 16));
+    }
 
-    // Animação de hover para os cards de serviço
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            gsap.to(this, {
+    // =============================================
+    // ANIMAÇÕES DE HOVER
+    // =============================================
+    function initHoverAnimations() {
+        // Cards de serviço
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => animateCardHover(card, true));
+            card.addEventListener('mouseleave', () => animateCardHover(card, false));
+        });
+
+        // Itens do portfólio
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', () => animatePortfolioHover(item, true));
+            item.addEventListener('mouseleave', () => animatePortfolioHover(item, false));
+        });
+    }
+
+    function animateCardHover(card, isHover) {
+        if (isHover) {
+            gsap.to(card, {
                 duration: 0.3,
                 y: -10,
                 boxShadow: '0 15px 30px rgba(0, 0, 0, 0.15)',
                 ease: 'power2.out'
             });
             
-            gsap.to(this.querySelector('.service-icon'), {
+            gsap.to(card.querySelector('.service-icon'), {
                 duration: 0.5,
                 rotationY: 180,
                 ease: 'back.out(1.7)'
             });
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            gsap.to(this, {
+        } else {
+            gsap.to(card, {
                 duration: 0.3,
                 y: 0,
                 boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
                 ease: 'power2.out'
             });
             
-            gsap.to(this.querySelector('.service-icon'), {
+            gsap.to(card.querySelector('.service-icon'), {
                 duration: 0.5,
                 rotationY: 0,
                 ease: 'back.out(1.7)'
             });
-        });
-    });
+        }
+    }
 
-    // Animação ao passar o mouse nos itens do portfólio
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            const overlay = this.querySelector('.portfolio-overlay');
+    function animatePortfolioHover(item, isHover) {
+        const overlay = item.querySelector('.portfolio-overlay');
+        if (!overlay) return;
+
+        if (isHover) {
             gsap.to(overlay, {
                 duration: 0.3,
                 opacity: 1,
@@ -468,73 +539,101 @@ document.addEventListener('DOMContentLoaded', function() {
                 stagger: 0.1,
                 ease: 'power2.out'
             });
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            const overlay = this.querySelector('.portfolio-overlay');
+        } else {
             gsap.to(overlay, {
                 duration: 0.3,
                 opacity: 0,
                 ease: 'power2.out'
             });
-        });
-    });
+        }
+    }
 
     // =============================================
-    // FUNCIONALIDADE DE ENVIO DE EMAIL COM EMAILJS
+    // FORMULÁRIO DE CONTATO
     // =============================================
+    function initContactForm() {
+        if (!DOM.contactForm || !DOM.formMessage) return;
 
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        DOM.contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = this.querySelector('button[type="submit"]');
-            const messageDiv = document.getElementById('formMessage');
+            const originalBtnText = submitBtn.textContent;
             
             // Estado de carregamento
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
-            messageDiv.style.display = 'none';
+            DOM.formMessage.style.display = 'none';
             
-            // Enviar email através do EmailJS
             emailjs.sendForm(
-                'service_2mr40ca', // ID do serviço no EmailJS
-                'template_p28xvac', // ID do template no EmailJS
+                'service_2mr40ca', // ID do serviço
+                'template_p28xvac', // ID do template
                 this
             )
-            .then(function() {
-                // Sucesso
-                messageDiv.textContent = 'Mensagem enviada com sucesso!';
-                messageDiv.style.color = '#4DD1E6';
-                messageDiv.style.display = 'block';
-                
-                // Resetar formulário
-                contactForm.reset();
-                
-                // Feedback visual
-                gsap.fromTo(messageDiv, 
-                    { y: 20, opacity: 0 }, 
-                    { y: 0, opacity: 1, duration: 0.5 }
-                );
-            }, function(error) {
-                // Erro
-                messageDiv.textContent = 'Ocorreu um erro. Tente novamente mais tarde.';
-                messageDiv.style.color = '#FF7A45';
-                messageDiv.style.display = 'block';
-                console.error('Erro no envio:', error);
-                
-                // Feedback visual
-                gsap.fromTo(messageDiv, 
-                    { x: -10 }, 
-                    { x: 0, duration: 0.3, ease: 'elastic.out(1, 0.5)' }
-                );
+            .then(() => {
+                showFormMessage('Mensagem enviada com sucesso!', 'success');
+                this.reset();
             })
-            .finally(function() {
-                // Restaurar botão
+            .catch((error) => {
+                console.error('Erro no envio:', error);
+                showFormMessage('Ocorreu um erro. Tente novamente mais tarde.', 'error');
+            })
+            .finally(() => {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar Mensagem';
+                submitBtn.textContent = originalBtnText;
             });
         });
     }
+
+    function showFormMessage(message, type) {
+        DOM.formMessage.textContent = message;
+        DOM.formMessage.style.color = type === 'success' ? '#4DD1E6' : '#FF7A45';
+        DOM.formMessage.style.display = 'block';
+        
+        gsap.fromTo(DOM.formMessage, 
+            { y: 20, opacity: 0 }, 
+            { y: 0, opacity: 1, duration: 0.5 }
+        );
+    }
+
+    // =============================================
+    // UTILITÁRIOS
+    // =============================================
+    function throttle(func, limit) {
+        let lastFunc;
+        let lastRan;
+        return function() {
+            const context = this;
+            const args = arguments;
+            if (!lastRan) {
+                func.apply(context, args);
+                lastRan = Date.now();
+            } else {
+                clearTimeout(lastFunc);
+                lastFunc = setTimeout(function() {
+                    if ((Date.now() - lastRan) >= limit) {
+                        func.apply(context, args);
+                        lastRan = Date.now();
+                    }
+                }, limit - (Date.now() - lastRan));
+            }
+        };
+    }
+
+    // =============================================
+    // INICIALIZAÇÃO
+    // =============================================
+    function init() {
+        initPreloader();
+        initMobileMenu();
+        initSmoothScroll();
+        initHeaderScroll();
+        initStatsAnimation();
+        initDynamicContent();
+        initParallax();
+        initHoverAnimations();
+        initContactForm();
+    }
+
+    init();
 });
