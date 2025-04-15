@@ -1119,7 +1119,7 @@ padding: 80px 30px 50px;
 
 
 .logo img {
-    height: 85px;
+    height: 80px;
     width: auto;
     object-fit: contain;
 }
@@ -1187,7 +1187,7 @@ font-size: 2.3rem;
 }
 
 .logo img {
-    height: 100px;
+    height: 85px;
     width: auto;
     object-fit: contain;
 }
