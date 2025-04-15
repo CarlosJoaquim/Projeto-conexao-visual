@@ -1113,6 +1113,28 @@ RESPONSIVIDADE - TABLET E DESKTOP
 @media (min-width: 768px) {
 .dynamic-content-container {
 padding: 80px 30px 50px;
+
+
+}
+
+
+.logo img {
+    height: 85px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo a {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.logo {
+    display: flex
+;
+    align-items: center;
+    gap: 23px;
 }
 
 .dynamic-content {
