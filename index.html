@@ -1,363 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Metatags Essenciais Otimizadas -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
     <meta name="fragment" content="!">
-    <meta name="description" content="Conexão Visual - Especialistas em Marketing Digital, Design Gráfico e Desenvolvimento Web. Soluções personalizadas para alavancar seu negócio no mundo digital.">
-    <meta name="keywords" content="marketing digital, design gráfico, desenvolvimento web, gestão de redes sociais, tráfego pago, SEO, criação de sites">
-    <title>Conexão Visual | Marketing Digital & Desenvolvimento Web</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="theme-color" content="#001429">
+
+    <!-- Meta Descrição Melhorada -->
+    <meta name="description" content="Agência líder em Marketing Digital em Angola. Especialistas em criação de sites, gestão de redes sociais e campanhas de tráfego pago em Luanda. Soluções sob medida para seu negócio digital.">
+
+    <!-- Keywords Otimizadas -->
+    <meta name="keywords" content="agência digital luanda, marketing digital angola, criar site profissional luanda, gestão redes sociais, SEO luanda, campanhas ads angola, design gráfico">
+
+    <!-- Título Otimizado -->
+    <title>Conexão Visual | Agência de Marketing Digital em Luanda</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Conexão Visual | Transformação Digital em Angola">
+    <meta property="og:description" content="Soluções completas em Marketing Digital e Desenvolvimento Web para alavancar seu negócio em Luanda e toda Angola.">
+    <meta property="og:image" content="https://conexaovisual.vercel.app/icone/conexao-social-share.jpg">
+    <meta property="og:url" content="https://conexaovisual.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_AO">
+    <meta property="og:site_name" content="Conexão Visual">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@conexaovisual">
+    <meta name="twitter:title" content="Conexão Visual | Agência Digital em Angola">
+    <meta name="twitter:description" content="Especialistas em Marketing Digital e Criação de Sites Profissionais em Luanda">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://conexaovisual.vercel.app">
+
+    <!-- Pré-carregamento -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Favicon Moderno -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icone/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icone/apple-touch-icon.png">
+    <link rel="shortcut icon" href="icone/favicon.ico" type="image/x-icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="icone/conexão-visua-png.png" type="image/x-icon">
-    <link rel="canonical" href="https://conexaovisual.vercel.app/"/>
-    <style>
-        /* Estilos temporários para mensagem do formulário */
-        .form-message {
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: none;
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Conexão Visual",
+        "image": "https://conexaovisual.vercel.app/icone/conexao-social-share.jpg",
+        "description": "Agência de Marketing Digital especializada em soluções para negócios em Angola",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Luanda",
+            "addressRegion": "Luanda",
+            "addressCountry": "AO"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-8.838333",
+            "longitude": "13.234444"
+        },
+        "telephone": "+244123456789",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
         }
-        
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #001429;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
-        }
-        
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            border-top-color: #4DD1E6;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-   /* =============================================
-   ESTILOS PARA MODAL DE INFORMAÇÕES DINÂMICAS
-   ============================================= */
-
-/* Variáveis CSS para consistência */
-:root {
-  --primary-color: #4DD1E6;
-  --primary-hover: #3ab7cc;
-  --dark-bg: rgba(0, 20, 41, 0.97);
-  --content-bg: rgba(255, 255, 255, 0.1);
-  --text-color: #ffffff;
-  --transition-speed: 0.3s;
-}
-
-/* Container Principal - Efeito de fade in */
-.dynamic-content-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--dark-bg);
-  z-index: 1000;
-  overflow-y: auto;
-  display: none;
-  opacity: 0;
-  padding: 60px 15px 30px;
-  box-sizing: border-box;
-  transition: opacity var(--transition-speed) ease;
-  backdrop-filter: blur(5px);
-}
-
-.dynamic-content-container.active {
-  display: block;
-  opacity: 1;
-}
-
-/* Conteúdo Centralizado */
-.dynamic-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  color: var(--text-color);
-  padding: 15px;
-  animation: fadeInUp 0.5s ease forwards;
-}
-
-/* Botão de Fechar - Melhor acessibilidade */
-.close-content-btn {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  background: var(--primary-color);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 1001;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-speed) ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.close-content-btn:hover,
-.close-content-btn:focus {
-  background: var(--primary-hover);
-  transform: scale(1.1);
-  outline: none;
-}
-
-/* Estilos para Cada Seção de Serviço */
-.service-detail {
-  padding: 20px;
-  background: var(--content-bg);
-  border-radius: 10px;
-  margin-bottom: 25px;
-  border-left: 3px solid var(--primary-color);
-  transition: transform 0.3s ease;
-}
-
-.service-detail:hover {
-  transform: translateY(-3px);
-}
-
-.service-detail h2 {
-  color: var(--primary-color);
-  margin-bottom: 15px;
-  font-size: 1.6rem;
-  font-weight: 600;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.service-detail h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-.service-detail h3 {
-  color: var(--primary-color);
-  margin: 22px 0 15px;
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-.service-detail p {
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.service-detail ul {
-  padding-left: 20px;
-  margin-bottom: 20px;
-}
-
-.service-detail li {
-  margin-bottom: 10px;
-  line-height: 1.5;
-  position: relative;
-  padding-left: 15px;
-}
-
-.service-detail li::before {
-  content: '•';
-  color: var(--primary-color);
-  position: absolute;
-  left: 0;
-  font-size: 1.2em;
-}
-
-/* Efeitos Visuais */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Barra de Scroll Personalizada */
-.dynamic-content-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.dynamic-content-container::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.1);
-}
-
-.dynamic-content-container::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 4px;
-}
-
-/* =============================================
-   RESPONSIVIDADE - TABLET E DESKTOP
-   ============================================= */
-@media (min-width: 768px) {
-  .dynamic-content-container {
-    padding: 80px 30px 50px;
-  }
-  
-  .dynamic-content {
-    padding: 30px;
-  }
-  
-  .close-content-btn {
-    top: 25px;
-    right: 25px;
-    width: 45px;
-    height: 45px;
-    font-size: 22px;
-  }
-  
-  .service-detail {
-    padding: 30px;
-    margin-bottom: 35px;
-  }
-  
-  .service-detail h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .service-detail h3 {
-    font-size: 1.6rem;
-    margin: 25px 0 18px;
-  }
-  
-  .service-detail p,
-  .service-detail li {
-    font-size: 1.05rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .service-detail {
-    padding: 40px;
-  }
-  
-  .service-detail h2 {
-    font-size: 2.3rem;
-  }
-}
-        /* Estilos para as imagens adicionadas */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        
-        .logo img {
-            height: 100px;
-            width: auto;
-            object-fit: contain;
-        }
-        
-        .logo a {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-        
-        .footer-logo img {
-            height: 100px;
-            width: auto;
-            object-fit: contain;
-        }
-    </style>
+    }
+    </script>
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
+    <!-- Preloader Otimizado -->
+    <div class="preloader" aria-hidden="true">
         <div class="loader"></div>
+        <p class="sr-only">Carregando Conexão Visual...</p>
     </div>
 
-    <!-- Header e Navegação -->
-    <header class="header">
+    <!-- Header Reestruturado -->
+    <header class="header" id="header">
         <div class="container">
             <div class="logo">
-                <a href="#home">
-                    <img src="icone/conexao-digital.png" alt="Logo Conexão Visual">
-                    Conexão <span>Visual</span>
+                <a href="#home" aria-label="Conexão Visual - Voltar ao início">
+                    <img src="icone/conexao-digital.png" alt="Logo Conexão Visual" width="120" height="40" loading="eager">
+                    <span class="logo-text">Conexão <span>Visual</span></span>
                 </a>
             </div>
             
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#about">Sobre Nós</a></li>
-                    <li><a href="#services">Serviços</a></li>
-                    <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#contact">Contato</a></li>
+            <nav class="nav" aria-label="Navegação principal">
+                <button class="mobile-menu-btn" aria-expanded="false" aria-controls="nav-list">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="#home" class="nav-link active">Início</a></li>
+                    <li><a href="#about" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="#services" class="nav-link">Serviços</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
                 </ul>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Container para conteúdo dinâmico (ADICIONADO) -->
-    <div id="dynamic-content-container" class="dynamic-content-container">
-        <button id="close-content-btn" class="close-content-btn">
-            <i class="fas fa-times"></i>
+    <!-- Conteúdo Dinâmico -->
+    <div id="dynamic-content-container" class="dynamic-content-container" aria-hidden="true">
+        <button id="close-content-btn" class="close-content-btn" aria-label="Fechar conteúdo">
+            <i class="fas fa-times" aria-hidden="true"></i>
         </button>
         <div id="dynamic-content" class="dynamic-content"></div>
     </div>
 
     <!-- Menu Mobile -->
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
         <ul>
-            <li><a href="#home">Início</a></li>
-            <li><a href="#about">Sobre Nós</a></li>
-            <li><a href="#services">Serviços</a></li>
-            <li><a href="#portfolio">Portfólio</a></li>
-            <li><a href="#contact">Contato</a></li>
+            <li><a href="#home" class="mobile-nav-link">Início</a></li>
+            <li><a href="#about" class="mobile-nav-link">Sobre Nós</a></li>
+            <li><a href="#services" class="mobile-nav-link">Serviços</a></li>
+            <li><a href="#portfolio" class="mobile-nav-link">Portfólio</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contato</a></li>
         </ul>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
+    <!-- Hero Section Melhorada -->
+    <section id="home" class="hero" aria-labelledby="hero-heading">
         <div class="container">
             <div class="hero-content">
-                <h1>Transforme seu negócio com soluções digitais inteligentes</h1>
+                <h1 id="hero-heading">Transforme seu negócio com soluções digitais inteligentes</h1>
                 <p class="subtitle">Impulsionamos marcas com estratégias de marketing digital, design criativo e desenvolvimento web de alta performance.</p>
                 <div class="hero-btns">
                     <a href="#contact" class="btn btn-primary">Solicitar Orçamento</a>
@@ -365,19 +141,19 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1734856080638-71e78b3d8d5f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipe de marketing digital trabalhando" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1734856080638-71e78b3d8d5f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipe de marketing digital trabalhando" loading="eager" width="720" height="480">
             </div>
         </div>
     </section>
 
     <!-- Sobre Nós -->
-    <section id="about" class="about">
+    <section id="about" class="about" aria-labelledby="about-heading">
         <div class="container">
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1653669487003-7d89b2020f3c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipe Conexão Visual" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1653669487003-7d89b2020f3c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipe Conexão Visual em reunião de trabalho" loading="lazy" width="600" height="400">
             </div>
             <div class="about-content">
-                <h2 class="section-title">Sobre a <span>Conexão Visual</span></h2>
+                <h2 id="about-heading" class="section-title">Sobre a <span>Conexão Visual</span></h2>
                 <p>Fundada em 2024, a Conexão Visual atua no mercado de novas tecnologias de informação e comunicação em Marketing Digital, com o objetivo de compreender as necessidades dos clientes e oferecer soluções personalizadas.</p>
                 <p>Contamos com uma equipe altamente qualificada e competente nos novos meios e canais de comunicação digital, buscando reconhecimento pela excelência e competência sólida tanto no mercado nacional como internacional.</p>
                 <div class="about-stats">
@@ -399,36 +175,35 @@
     </section>
 
     <!-- Nossos Serviços -->
-    <section id="services" class="services">
+    <section id="services" class="services" aria-labelledby="services-heading">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nossos <span>Serviços</span></h2>
+                <h2 id="services-heading" class="section-title">Nossos <span>Serviços</span></h2>
                 <p class="section-subtitle">Soluções completas para alavancar seu negócio no mundo digital</p>
             </div>
 
             <div class="services-grid">
                 <!-- Design Gráfico -->
-                <div class="service-card">
+                <article class="service-card" aria-labelledby="design-heading">
                     <div class="service-icon">
-                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-palette" aria-hidden="true"></i>
                     </div>
-                    <h3>Design Gráfico</h3>
+                    <h3 id="design-heading">Design Gráfico</h3>
                     <ul>
                         <li>Branding (Marca)</li>
                         <li>Criativos Chamativos</li>
                         <li>Panfletos e Flyers</li>
                         <li>Cartões de Visita</li>
                     </ul>
-                    <!-- Alterado o href para #design -->
-                    <a href="#design" class="btn btn-small">Saiba Mais</a>
-                </div>
+                    <a href="#design" class="btn btn-small" aria-label="Saiba mais sobre Design Gráfico">Saiba Mais</a>
+                </article>
 
                 <!-- Marketing Digital -->
-                <div class="service-card">
+                <article class="service-card" aria-labelledby="marketing-heading">
                     <div class="service-icon">
-                        <i class="fas fa-bullseye"></i>
+                        <i class="fas fa-bullseye" aria-hidden="true"></i>
                     </div>
-                    <h3>Marketing Digital</h3>
+                    <h3 id="marketing-heading">Marketing Digital</h3>
                     <ul>
                         <li>Gestão de Tráfego Pago</li>
                         <li>Facebook & Instagram Ads</li>
@@ -437,16 +212,15 @@
                         <li>Criação de Conteúdo</li>
                         <li>Campanhas de Publicidade</li>
                     </ul>
-                    <!-- Alterado o href para #marketing -->
-                    <a href="#marketing" class="btn btn-small">Saiba Mais</a>
-                </div>
+                    <a href="#marketing" class="btn btn-small" aria-label="Saiba mais sobre Marketing Digital">Saiba Mais</a>
+                </article>
 
                 <!-- Desenvolvimento Web -->
-                <div class="service-card">
+                <article class="service-card" aria-labelledby="dev-heading">
                     <div class="service-icon">
-                        <i class="fas fa-code"></i>
+                        <i class="fas fa-code" aria-hidden="true"></i>
                     </div>
-                    <h3>Desenvolvimento Web</h3>
+                    <h3 id="dev-heading">Desenvolvimento Web</h3>
                     <ul>
                         <li>Sites Profissionais</li>
                         <li>E-commerce</li>
@@ -455,146 +229,150 @@
                         <li>Otimização SEO</li>
                         <li>Hospedagem</li>
                     </ul>
-                    <!-- Alterado o href para #desenvolvimento -->
-                    <a href="#desenvolvimento" class="btn btn-small">Saiba Mais</a>
-                </div>
+                    <a href="#desenvolvimento" class="btn btn-small" aria-label="Saiba mais sobre Desenvolvimento Web">Saiba Mais</a>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Destaques -->
-    <section class="highlights">
+    <section class="highlights" aria-label="Destaques da Conexão Visual">
         <div class="container">
-            <div class="highlight-item">
-                <i class="fas fa-chart-line"></i>
+            <article class="highlight-item">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
                 <h3>Resultados Mensuráveis</h3>
                 <p>Nossas estratégias são baseadas em dados e métricas para garantir o melhor retorno sobre investimento.</p>
-            </div>
-            <div class="highlight-item">
-                <i class="fas fa-lightbulb"></i>
+            </article>
+            <article class="highlight-item">
+                <i class="fas fa-lightbulb" aria-hidden="true"></i>
                 <h3>Soluções Criativas</h3>
                 <p>Abordagens inovadoras para destacar sua marca em um mercado cada vez mais competitivo.</p>
-            </div>
-            <div class="highlight-item">
-                <i class="fas fa-headset"></i>
+            </article>
+            <article class="highlight-item">
+                <i class="fas fa-headset" aria-hidden="true"></i>
                 <h3>Suporte Dedicado</h3>
                 <p>Equipe sempre disponível para acompanhar seus projetos e tirar dúvidas.</p>
-            </div>
+            </article>
         </div>
     </section>
 
     <!-- Portfólio -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio" aria-labelledby="portfolio-heading">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nosso <span>Portfólio</span></h2>
+                <h2 id="portfolio-heading" class="section-title">Nosso <span>Portfólio</span></h2>
                 <p class="section-subtitle">Alguns dos nossos trabalhos recentes</p>
             </div>
 
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projeto de branding" loading="lazy">
+                <article class="portfolio-item" aria-labelledby="portfolio-1">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projeto de branding para restaurante" loading="lazy" width="450" height="300">
                     <div class="portfolio-overlay">
-                        <h3>Branding - Restaurante</h3>
+                        <h3 id="portfolio-1">Branding - Restaurante</h3>
                         <p>Identidade visual completa</p>
-                        <a href="#design" class="btn btn-small">Ver Detalhes</a>
+                        <a href="#design" class="btn btn-small" aria-label="Ver detalhes do projeto de branding">Ver Detalhes</a>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Website desenvolvido" loading="lazy">
+                </article>
+                <article class="portfolio-item" aria-labelledby="portfolio-2">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Website desenvolvido para clínica médica" loading="lazy" width="450" height="300">
                     <div class="portfolio-overlay">
-                        <h3>Website - Clínica Médica</h3>
+                        <h3 id="portfolio-2">Website - Clínica Médica</h3>
                         <p>Site institucional responsivo</p>
-                        <a href="#desenvolvimento" class="btn btn-small">Ver Detalhes</a>
+                        <a href="#desenvolvimento" class="btn btn-small" aria-label="Ver detalhes do website da clínica">Ver Detalhes</a>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campanha de tráfego pago" loading="lazy">
+                </article>
+                <article class="portfolio-item" aria-labelledby="portfolio-3">
+                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campanha de tráfego pago para e-commerce" loading="lazy" width="450" height="300">
                     <div class="portfolio-overlay">
-                        <h3>Campanha - E-commerce</h3>
+                        <h3 id="portfolio-3">Campanha - E-commerce</h3>
                         <p>Gestão de tráfego pago</p>
-                        <a href="#marketing" class="btn btn-small">Ver Detalhes</a>
+                        <a href="#marketing" class="btn btn-small" aria-label="Ver detalhes da campanha de e-commerce">Ver Detalhes</a>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Depoimentos -->
-    <section class="testimonials">
+    <section class="testimonials" aria-labelledby="testimonials-heading">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">O que dizem <span>nossos clientes</span></h2>
+                <h2 id="testimonials-heading" class="section-title">O que dizem <span>nossos clientes</span></h2>
             </div>
 
             <div class="testimonials-slider">
-                <div class="testimonial-item">
+                <article class="testimonial-item" aria-labelledby="testimonial-1">
                     <div class="testimonial-content">
                         <p>"A Conexão Visual transformou nossa presença digital. Em poucos meses nosso faturamento online aumentou em 300% com as campanhas de tráfego pago."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Cliente satisfeito" loading="lazy">
-                        <h4>Ana Silva</h4>
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Silva - CEO Moda Feminina" loading="lazy" width="80" height="80">
+                        <h3 id="testimonial-1">Ana Silva</h3>
                         <p>CEO - Moda Feminina</p>
                     </div>
-                </div>
-                <div class="testimonial-item">
+                </article>
+                <article class="testimonial-item" aria-labelledby="testimonial-2">
                     <div class="testimonial-content">
                         <p>"O site que desenvolveram para nossa clínica superou todas as expectativas. Profissionalismo e atenção aos detalhes em todo o processo."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente satisfeito" loading="lazy">
-                        <h4>Carlos Mendes</h4>
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Mendes - Diretor Clínica Saúde" loading="lazy" width="80" height="80">
+                        <h3 id="testimonial-2">Carlos Mendes</h3>
                         <p>Diretor - Clínica Saúde</p>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Contato -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" aria-labelledby="contact-heading">
         <div class="container">
             <div class="contact-content">
-                <h2 class="section-title">Pronto para <span>transformar</span> seu negócio?</h2>
+                <h2 id="contact-heading" class="section-title">Pronto para <span>transformar</span> seu negócio?</h2>
                 <p>Entre em contato conosco para uma consultoria gratuita e descubra como podemos ajudar sua empresa a crescer no mundo digital.</p>
                 
                 <div class="contact-info">
                     <div class="info-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>+244 123 456 789</p>
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                        <p><a href="tel:+244123456789">+244 123 456 789</a></p>
                     </div>
                     <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>contato@conexaovisual.com</p>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <p><a href="mailto:contato@conexaovisual.com">contato@conexaovisual.com</a></p>
                     </div>
                     <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <p>Luanda, Angola</p>
                     </div>
                 </div>
 
                 <div class="social-links">
-                    <a href="https://www.facebook.com/people/Conex%C3%A3o-Visual/61561587043238/?mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/conexao_visual1?igsh=MWRoYjJlb3Bzc2x1aA%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/people/Conex%C3%A3o-Visual/61561587043238/?mibextid=ZbWKwL" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/conexao_visual1?igsh=MWRoYjJlb3Bzc2x1aA%3D%3D&utm_source=qr" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="contact-form">
-                <form id="contactForm">
+                <form id="contactForm" aria-labelledby="form-heading">
+                    <h3 id="form-heading" class="sr-only">Formulário de Contato</h3>
                     <div class="form-group">
-                        <input type="text" name="nome" placeholder="Seu Nome" required>
+                        <label for="nome" class="sr-only">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Seu Email" required>
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Seu Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="telefone" placeholder="Seu Telefone">
+                        <label for="telefone" class="sr-only">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="Seu Telefone">
                     </div>
                     <div class="form-group">
-                        <select name="servico" required>
+                        <label for="servico" class="sr-only">Serviço</label>
+                        <select id="servico" name="servico" required>
                             <option value="" disabled selected>Selecione um serviço</option>
                             <option value="Design Gráfico">Design Gráfico</option>
                             <option value="Marketing Digital">Marketing Digital</option>
@@ -604,22 +382,23 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+                        <label for="mensagem" class="sr-only">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
                 </form>
-                <div id="formMessage" class="form-message"></div>
+                <div id="formMessage" class="form-message" aria-live="polite"></div>
             </div>
         </div>
     </section>
 
     <!-- Rodapé -->
-    <footer class="footer">
+    <footer class="footer" aria-label="Rodapé">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="icone/conexao-digital.png" alt="Logo Conexão Visual">
+                        <img src="icone/conexao-digital.png" alt="Logo Conexão Visual" width="120" height="40" loading="lazy">
                         <h3>Conexão Visual</h3>
                     </div>
                     <p>Especialistas em Marketing Digital, Design Gráfico e Desenvolvimento Web. Soluções personalizadas para alavancar seu negócio no mundo digital.</p>
@@ -637,7 +416,6 @@
                 <div class="footer-col">
                     <h3>Serviços</h3>
                     <ul>
-                        <!-- Alterados os hrefs para as âncoras correspondentes -->
                         <li><a href="#design">Design Gráfico</a></li>
                         <li><a href="#marketing">Marketing Digital</a></li>
                         <li><a href="#desenvolvimento">Desenvolvimento Web</a></li>
@@ -648,9 +426,10 @@
                 <div class="footer-col">
                     <h3>Newsletter</h3>
                     <p>Assine nossa newsletter para receber dicas e novidades.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu Email" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    <form class="newsletter-form" aria-label="Formulário de newsletter">
+                        <label for="newsletter-email" class="sr-only">Email</label>
+                        <input type="email" id="newsletter-email" placeholder="Seu Email" required>
+                        <button type="submit" aria-label="Assinar newsletter"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
                     </form>
                 </div>
             </div>
@@ -662,11 +441,11 @@
         </div>
     </footer>
     
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Scripts Otimizados -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="user.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/map.js"></script>
+    <script src="js/map.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="user.js" defer></script>
 </body>
 </html>
