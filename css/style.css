@@ -128,7 +128,7 @@ ul {
 }
 
 .logo a {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--white);
 }
@@ -1134,7 +1134,7 @@ padding: 80px 30px 50px;
     display: flex
 ;
     align-items: center;
-    gap: 35px;
+    gap: 13px;
 }
 
 .dynamic-content {
@@ -1183,7 +1183,7 @@ font-size: 2.3rem;
 .logo {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 13px;
 }
 
 .logo img {
