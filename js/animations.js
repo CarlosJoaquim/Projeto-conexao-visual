@@ -548,53 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // =============================================
-    // FORMULÁRIO DE CONTATO
-    // =============================================
-    function initContactForm() {
-        if (!DOM.contactForm || !DOM.formMessage) return;
 
-        DOM.contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.textContent;
-            
-            // Estado de carregamento
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            DOM.formMessage.style.display = 'none';
-            
-            emailjs.sendForm(
-                'service_vz4bceg', // ID do serviço
-                'template_9slap3q', // ID do template
-                this
-            )
-            .then(() => {
-                showFormMessage('Mensagem enviada com sucesso!', 'success');
-                this.reset();
-            })
-            .catch((error) => {
-                console.error('Erro no envio:', error);
-                showFormMessage('Ocorreu um erro. Tente novamente mais tarde.', 'error');
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
-            });
-        });
-    }
-
-    function showFormMessage(message, type) {
-        DOM.formMessage.textContent = message;
-        DOM.formMessage.style.color = type === 'success' ? '#4DD1E6' : '#FF7A45';
-        DOM.formMessage.style.display = 'block';
-        
-        gsap.fromTo(DOM.formMessage, 
-            { y: 20, opacity: 0 }, 
-            { y: 0, opacity: 1, duration: 0.5 }
-        );
-    }
 
     // =============================================
     // UTILITÁRIOS
